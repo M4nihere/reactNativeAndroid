@@ -3,39 +3,28 @@ name: Build Android APK
 on:
   push:
     branches:
-      - main  # Change this to your default branch if it's not 'main'
+      - main
 
 jobs:
   build:
     runs-on: docker
-
     steps:
-      # Step 1: Check out the code
       - name: Checkout code
         uses: actions/checkout@v4
-
-      # Step 2: Pull the React Native Android Docker image
-      - name: Pull Docker image
+      
+      - name: Set up Docker environment
+        run: docker pull m4nihere/android:latest
+      
+      - name: Run Docker container to build APK
         run: |
-          sudo docker pull reactnativecommunity/react-native-android
-
-      # Step 3: Run the Docker container and build the APK
-      - name: Build APK
-        run: |
-          sudo docker run --rm -v ${{ github.workspace }}:/app -w /app reactnativecommunity/react-native-android /bin/bash -c "
-          npm install &&
-          echo 'sdk.dir=/usr/local/android-sdk' > android/local.properties &&
-          cd android && ./gradlew assembleRelease
-          "
-
-      # Step 4: Copy the built APK from the container to the host
-      - name: Copy APK
-        run: |
-          cp android/app/build/outputs/apk/release/app-release.apk ./app-release.apk
-
-      # Step 5: Upload APK as an artifact
-      - name: Upload APK
+          docker run \
+          -v ${{ github.workspace }}:/workspace \
+          -w /workspace \
+          m4nihere/android:latest \
+          /bin/bash -c "cd android && ./gradlew assembleRelease"
+      
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: android-apk
-          path: ./app-release.apk
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
