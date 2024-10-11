@@ -17,12 +17,12 @@ jobs:
       # Step 2: Pull the React Native Android Docker image
       - name: Pull Docker image
         run: |
-          docker pull reactnativecommunity/react-native-android
+          sudo docker pull reactnativecommunity/react-native-android
 
       # Step 3: Run the Docker container and build the APK
       - name: Build APK
         run: |
-          docker run --rm -v ${{ github.workspace }}:/app -w /app reactnativecommunity/react-native-android /bin/bash -c "
+          sudo docker run --rm -v ${{ github.workspace }}:/app -w /app reactnativecommunity/react-native-android /bin/bash -c "
           npm install &&
           echo 'sdk.dir=/usr/local/android-sdk' > android/local.properties &&
           cd android && ./gradlew assembleRelease
