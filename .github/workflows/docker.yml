@@ -12,7 +12,7 @@ jobs:
     steps:
       # Step 1: Check out the code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Step 2: Build the Docker image
       - name: Build Docker image
@@ -31,7 +31,7 @@ jobs:
 
       # Step 5: Upload APK as an artifact
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: android-apk
           path: ./app-release.apk
