@@ -14,21 +14,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-
-      # Step 2: Build the Docker image
-      - name: Build Docker image
+      # Step 2: Pull the React Native Android Docker image
+      - name: Pull Docker image
         run: |
-          sudo docker build -t react-native-android-app .
+          docker pull reactnativecommunity/react-native-android
 
-      # Step 3: Run the Docker container to build the APK
+      # Step 3: Run the Docker container and build the APK
       - name: Build APK
         run: |
-          sudo docker run --name build-container react-native-android-app
+          docker run --rm -v ${{ github.workspace }}:/app -w /app reactnativecommunity/react-native-android /bin/bash -c "
+          npm install &&
+          echo 'sdk.dir=/usr/local/android-sdk' > android/local.properties &&
+          cd android && ./gradlew assembleRelease
+          "
 
-      # Step 4: Copy the built APK from the Docker container
+      # Step 4: Copy the built APK from the container to the host
       - name: Copy APK
         run: |
-          sudo docker cp build-container:/app/android/app/build/outputs/apk/release/app-release.apk ./app-release.apk
+          cp android/app/build/outputs/apk/release/app-release.apk ./app-release.apk
 
       # Step 5: Upload APK as an artifact
       - name: Upload APK
@@ -36,8 +39,3 @@ jobs:
         with:
           name: android-apk
           path: ./app-release.apk
-
-      # Step 6: Clean up the Docker container
-      - name: Cleanup
-        run: |
-          sudo docker rm -f build-container
