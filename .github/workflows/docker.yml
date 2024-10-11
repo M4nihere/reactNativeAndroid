@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: docker
+    runs-on: docker  # Correct runner for running Docker
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -15,16 +15,15 @@ jobs:
       - name: Set up Docker environment
         run: docker pull m4nihere/android:latest
       
-
-
-      - name: Copy project
+      - name: Copy project to home directory
         run: |
-            sudo mkdir ~/app
-            sudo cp -rvf * ~/app
+          mkdir -p ~/app
+          cp -rvf . ~/app
 
       - name: Install Node.js dependencies
         run: |
-          sudo docker run \
+          docker run \
+          --user $(id -u):$(id -g) \  # Run as current user
           -v ~/app:/app \
           -w /app \
           m4nihere/android:latest \
@@ -32,7 +31,8 @@ jobs:
 
       - name: Run Docker container to build APK
         run: |
-          sudo docker run \
+          docker run \
+          --user $(id -u):$(id -g) \  # Run as current user
           -v ~/app:/app \
           -w /app \
           m4nihere/android:latest \
@@ -42,4 +42,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-release.apk
-          path: android/app/build/outputs/apk/release/app-release.apk
+          path: ~/app/android/app/build/outputs/apk/release/app-release.apk
