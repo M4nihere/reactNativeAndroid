@@ -19,12 +19,12 @@ jobs:
 
       - name: Copy project
         run: |
-            mkdir ~/app
-            cp -rvf * ~/app
+            sudo mkdir ~/app
+            sudo cp -rvf * ~/app
 
       - name: Install Node.js dependencies
         run: |
-          docker run \
+          sudo docker run \
           -v ~/app:/app \
           -w /app \
           m4nihere/android:latest \
@@ -32,7 +32,7 @@ jobs:
 
       - name: Run Docker container to build APK
         run: |
-          docker run \
+          sudo docker run \
           -v ~/app:/app \
           -w /app \
           m4nihere/android:latest \
