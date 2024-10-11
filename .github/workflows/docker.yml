@@ -15,6 +15,14 @@ jobs:
       - name: Set up Docker environment
         run: docker pull m4nihere/android:latest
       
+      - name: Install Node.js dependencies
+        run: |
+          docker run \
+          -v ${{ github.workspace }}:/workspace \
+          -w /workspace \
+          your-dockerhub-username/react-native-android-build:latest \
+          /bin/bash -c "npm install"
+
       - name: Run Docker container to build APK
         run: |
           docker run \
