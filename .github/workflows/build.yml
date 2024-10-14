@@ -36,19 +36,19 @@ jobs:
       - name: Run Unit Tests
         run: cd android && ./gradlew test
 
-      - name: Build Application
-        run: |
-          cd android && ./gradlew assembleRelease
+     # - name: Build Application
+     #   run: |
+     #     cd android && ./gradlew assembleRelease
 
       - name: .aab realase build
-        run: npx react-native build-android --mode=release
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-release.apk  
-          path: android/app/build/outputs/apk/release/app-release.apk
-          retention-days: 1
+        run: ./gradlew bundleRelease
+#
+      #- name: Upload APK
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: app-release.apk  
+      #    path: android/app/build/outputs/apk/release/app-release.apk
+      #    retention-days: 1
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
