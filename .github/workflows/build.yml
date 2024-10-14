@@ -34,10 +34,9 @@ jobs:
       - name: Run Unit Tests
         run: cd android && ./gradlew test
 
-      - name: Build SampleApplication
+      - name: Build Application
         run: |
-          cd android && chmod +x ./gradlew
-          ./gradlew assembleRelease
+          cd android && ./gradlew assembleRelease
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
