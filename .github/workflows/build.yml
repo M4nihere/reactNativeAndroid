@@ -20,6 +20,9 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Installing Dependencies
+        run: npm install
+        
       - name: Build SampleApplication
         run: |
           cd android && chmod +x ./gradlew
