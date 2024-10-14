@@ -12,4 +12,4 @@ jobs:
     runs-on: android
     steps:
       - name: Setup Environment for job 
-        run: actions/checkoutv4
+        uses: actions/checkoutv4
