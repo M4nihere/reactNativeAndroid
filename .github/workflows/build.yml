@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     if: contains(github.event.head_commit.message, 'github')
-    runs-on: android
+    runs-on: manish
     steps:
       - name: Setup Environment for job 
         uses: actions/checkout@v4
