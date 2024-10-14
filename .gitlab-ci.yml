@@ -1,4 +1,4 @@
-Deploy:
+deploy:
   stage: deploy
   before_script:
     - whoami
