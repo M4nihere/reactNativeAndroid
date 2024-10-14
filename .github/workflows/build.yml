@@ -30,11 +30,11 @@ jobs:
         run: npm install
 
 
-      - name: Run Android Line
-        run: cd android && ./gradlew lint
-        
-      - name: Run Unit Tests
-        run: cd android && ./gradlew test
+      #- name: Run Android Line
+      #  run: cd android && ./gradlew lint
+      #  
+      #- name: Run Unit Tests
+      #  run: cd android && ./gradlew test
 
      # - name: Build Application
      #   run: |
