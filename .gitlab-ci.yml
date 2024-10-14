@@ -23,7 +23,8 @@ before_script:
   - npm install
 
 build_android_apk:
-  tags: android
+  tags: 
+    - android
   stage: build
   script:
     # Change to the android directory, make gradlew executable, and build the APK
