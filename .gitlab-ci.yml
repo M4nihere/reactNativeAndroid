@@ -2,6 +2,8 @@ deploy:
   stage: deploy
   before_script:
     - whoami
+  script:
+    - whoami
   tags:
     - android
 
