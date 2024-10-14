@@ -2,7 +2,8 @@ Deploy:
   stage: deploy
   before_script:
     - whoami
-
+  tags:
+    - android
 
 #variables:
 #  JAVA_HOME: "/usr/lib/jvm/java-21-openjdk"
