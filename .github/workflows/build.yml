@@ -17,4 +17,7 @@ jobs:
         with:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '21'
-      - run: java HelloWorldApp.java
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Build SampleApplication
+        run: ./gradlew --no-daemon build
