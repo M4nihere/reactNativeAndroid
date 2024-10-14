@@ -61,7 +61,7 @@ jobs:
       # Create a GitHub Release and upload the APK/AAB files
       - name: Create GitHub Release
         id: create_release
-        uses: actions/create-release@v4
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.gh_token }}
         with:
@@ -72,7 +72,7 @@ jobs:
 
       # Upload APK to GitHub Release
       - name: Upload APK to GitHub Release
-        uses: actions/upload-release-asset@v4
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.gh_token }}
         with:
@@ -83,7 +83,7 @@ jobs:
 
       # Upload AAB to GitHub Release
       - name: Upload AAB to GitHub Release
-        uses: actions/upload-release-asset@v4
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.gh_token }}
         with:
