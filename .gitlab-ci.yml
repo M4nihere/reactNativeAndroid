@@ -1,44 +1,38 @@
-deploy:
-  stage: deploy
-  before_script:
-    - whoami
-  script:
-    - whoami
-  tags:
-    - make
+stages:
+  - build
 
-#variables:
-#  JAVA_HOME: "/usr/lib/jvm/java-21-openjdk"
-#  ANDROID_HOME: "/sdk"
-#  GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
-#  PATH: "$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
-#
-#before_script:
-#  # Check out the repository
-#  - git checkout $CI_COMMIT_REF_NAME
-#  
-#  # Install Java 21
-#  - apt-get update && apt-get install -y openjdk-21-jdk
-#
-#  # Setup Android SDK
-#  - sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0"
-#
-#  # Install Node.js (version 20)
-#  - curl -sL https://deb.nodesource.com/setup_20.x | bash -
-#  - apt-get install -y nodejs
-#  - npm install
-#
-#build_android_apk:
-#  tags: 
-#    - android
-#  stage: build
-#  script:
-#    # Change to the android directory, make gradlew executable, and build the APK
-#    - cd android && chmod +x ./gradlew
-#    - ./gradlew assembleRelease
-#  artifacts:
-#    # Upload the APK as an artifact
-#    paths:
-#      - android/app/build/outputs/apk/release/app-release.apk
-#    expire_in: 1 week
+variables:
+  JAVA_HOME: "/usr/lib/jvm/java-21-openjdk"
+  ANDROID_HOME: "/sdk"
+  GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
+  PATH: "$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
+
+before_script:
+  # Check out the repository
+  - git checkout $CI_COMMIT_REF_NAME
+  
+  # Install Java 21
+  - apt-get update && apt-get install -y openjdk-21-jdk
+
+  # Setup Android SDK
+  - sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0"
+
+  # Install Node.js (version 20)
+  - curl -sL https://deb.nodesource.com/setup_20.x | bash -
+  - apt-get install -y nodejs
+  - npm install
+
+build_android_apk:
+  tags: 
+    - make
+  stage: build
+  script:
+    # Change to the android directory, make gradlew executable, and build the APK
+    - cd android && chmod +x ./gradlew
+    - ./gradlew assembleRelease
+  artifacts:
+    # Upload the APK as an artifact
+    paths:
+      - android/app/build/outputs/apk/release/app-release.apk
+    expire_in: 1 week
 
