@@ -41,7 +41,7 @@ jobs:
      #     cd android && ./gradlew assembleRelease
 
       - name: .aab realase build
-        run: cd android &&  ./gradlew bundleRelease
+        run: cd android &&  ./gradlew bundleRelease && ls -latr
 #
       #- name: Upload APK
       #  uses: actions/upload-artifact@v4
