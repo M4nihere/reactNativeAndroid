@@ -33,8 +33,8 @@ jobs:
           cd android && chmod +x ./gradlew
           ./gradlew assembleRelease
 
-          - name: Upload APK
-          uses: actions/upload-artifact@v3
-          with:
-            name: app-release.apk  # Name of the artifact
-            path: android/app/build/outputs/apk/release/app-release.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release.apk  # Name of the artifact
+          path: android/app/build/outputs/apk/release/app-release.apk
