@@ -40,6 +40,9 @@ jobs:
         run: |
           cd android && ./gradlew assembleRelease
 
+      - name: .aab realase build
+        run: npx react-native build-android --mode=release
+        
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
