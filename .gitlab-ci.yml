@@ -16,7 +16,7 @@ before_script:
 build:
   stage: build
   tags:
-    - docker
+    - make
   script:
     - echo "Building the React Native Android App"
     - cd android
@@ -29,7 +29,7 @@ build:
 test:
   stage: test
   tags:
-    - docker
+    - make
   script:
     - echo "Running tests"
     - npm test  # Adjust according to your testing setup
@@ -37,7 +37,7 @@ test:
 deploy:
   stage: deploy
   tags:
-    - docker
+    - make
   script:
     - echo "Deploying to your target environment"
     # Add your deployment commands here (e.g., upload APK to Firebase, Play Store, etc.)
