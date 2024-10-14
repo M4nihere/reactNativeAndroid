@@ -23,6 +23,7 @@ before_script:
   - npm install
 
 build_android_apk:
+  tags: android
   stage: build
   script:
     # Change to the android directory, make gradlew executable, and build the APK
@@ -33,3 +34,4 @@ build_android_apk:
     paths:
       - android/app/build/outputs/apk/release/app-release.apk
     expire_in: 1 week
+
