@@ -1,38 +1,45 @@
+image: # Replace with your Docker image name or leave it blank to use the Dockerfile.
+
 stages:
   - build
+  - test
+  - deploy
 
 variables:
-  JAVA_HOME: "/usr/lib/jvm/java-21-openjdk"
-  ANDROID_HOME: "/sdk"
-  GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
-  PATH: "$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
+  ANDROID_COMPILE_SDK: "31"
+  ANDROID_BUILD_TOOLS: "31.0.0"
+  ANDROID_TARGET_SDK: "31"
 
 before_script:
-  # Check out the repository
-  - git checkout $CI_COMMIT_REF_NAME
-  
-  # Install Java 21
-  - apt-get update && apt-get install -y openjdk-21-jdk
+  - export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-  # Setup Android SDK
-  - sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0"
-
-  # Install Node.js (version 20)
-  - curl -sL https://deb.nodesource.com/setup_20.x | bash -
-  - apt-get install -y nodejs
-  - npm install
-
-build_android_apk:
-  tags: 
-    - make
+build:
   stage: build
+  tags:
+    - docker
   script:
-    # Change to the android directory, make gradlew executable, and build the APK
-    - cd android && chmod +x ./gradlew
-    - ./gradlew assembleRelease
+    - echo "Building the React Native Android App"
+    - cd android
+    - ./gradlew assembleRelease  # or ./gradlew assembleDebug
   artifacts:
-    # Upload the APK as an artifact
     paths:
-      - android/app/build/outputs/apk/release/app-release.apk
-    expire_in: 1 week
+      - android/app/build/outputs/apk/release/app-release.apk  # Adjust according to your project structure
+      - android/app/build/outputs/apk/debug/app-debug.apk  # If you're building debug APK
 
+test:
+  stage: test
+  tags:
+    - docker
+  script:
+    - echo "Running tests"
+    - npm test  # Adjust according to your testing setup
+
+deploy:
+  stage: deploy
+  tags:
+    - docker
+  script:
+    - echo "Deploying to your target environment"
+    # Add your deployment commands here (e.g., upload APK to Firebase, Play Store, etc.)
+  only:
+    - main  # Adjust this based on your branching strategy
