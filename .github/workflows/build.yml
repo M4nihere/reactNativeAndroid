@@ -21,4 +21,4 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Build SampleApplication
-        run: ./gradlew --no-daemon build
+        run: cd android && ./gradlew --no-daemon build
