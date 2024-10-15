@@ -65,8 +65,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.gh_token }}
         with:
-          tag_name: v$(date +'%Y%m%d%H%M%S') # You can dynamically set this version
-          release_name: Release v$(date +'%Y-%m-%d %H:%M:%S')
+          tag_name:  v${{ env.VERSION_CODE }}-${{ github.run_number }}# You can dynamically set this version
+          release_name: Release v${{ env.VERSION_NAME }}-${{ github.run_number }}
           draft: false
           prerelease: false
 
