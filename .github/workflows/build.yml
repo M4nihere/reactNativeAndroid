@@ -42,7 +42,7 @@ jobs:
 
       - name: .aab realase build
         run: cd android &&  ./gradlew bundleRelease && ls -latr
-#
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
@@ -65,8 +65,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.gh_token }}
         with:
-          tag_name: v1.0.0-${{ github.sha }} # You can dynamically set this version
-          release_name: Release v1.0.0-${{ github.sha }}
+          tag_name: v$(date +'%Y%m%d%H%M%S') # You can dynamically set this version
+          release_name: Release v$(date +'%Y-%m-%d %H:%M:%S')
           draft: false
           prerelease: false
 
