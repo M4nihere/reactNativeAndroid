@@ -36,9 +36,9 @@ android {
         }
         release {
             // Path to the keystore file
-            storeFile file('../mykey.keystore')
+            storeFile file('../foo.keystore')
             storePassword 'manish' // Replace with the password you used for the keystore
-            keyAlias 'mykey' // Replace with your alias
+            keyAlias 'foo' // Replace with your alias
             keyPassword 'manish' // Replace with the password you used for the key
         }
     }
@@ -49,7 +49,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
