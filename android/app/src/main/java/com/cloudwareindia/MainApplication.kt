@@ -1,4 +1,4 @@
-package com.android
+package com.cloudwareindia
 
 import android.app.Application
 import com.facebook.react.PackageList
