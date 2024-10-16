@@ -19,9 +19,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.android"
+    namespace "com.cloudwareindia.testApp"
     defaultConfig {
-        applicationId "com.android"
+        applicationId "com.cloudwareindia.testApp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
