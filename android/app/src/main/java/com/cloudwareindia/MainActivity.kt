@@ -1,4 +1,4 @@
-package com.cloudwareindia
+package com.cloudwareindia.testApp
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
