@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "91950373246",
+    "project_id": "cloudwareindia-702c4",
+    "storage_bucket": "cloudwareindia-702c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91950373246:android:73108cdbb67228d7defb2f",
+        "android_client_info": {
+          "package_name": "com.cloudwareindia.testApp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9zcvTWmNu5T_oHJvNsww3riAH7eMSBcw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

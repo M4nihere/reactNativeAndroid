@@ -2,16 +2,14 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
+// Add the Google services Gradle plugin
+apply plugin: "com.google.gms.google-services"
 
 react {
-
     autolinkLibrariesWithApp()
 }
 
-
 def enableProguardInReleaseBuilds = false
-
-
 def jscFlavor = 'org.webkit:android-jsc:+'
 
 android {
@@ -35,11 +33,10 @@ android {
             keyPassword 'android'
         }
         release {
-            // Path to the keystore file
             storeFile file('../foo.keystore')
-            storePassword 'manish' // Replace with the password you used for the keystore
-            keyAlias 'foo' // Replace with your alias
-            keyPassword 'manish' // Replace with the password you used for the key
+            storePassword 'manish' 
+            keyAlias 'foo' 
+            keyPassword 'manish' 
         }
     }
     buildTypes {
@@ -47,8 +44,6 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
@@ -65,4 +60,10 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:33.4.0')
+
+    // Add the dependencies for Firebase products you want to use
+    implementation 'com.google.firebase:firebase-analytics'
 }
