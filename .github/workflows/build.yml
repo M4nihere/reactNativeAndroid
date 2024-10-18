@@ -48,7 +48,7 @@ jobs:
       #    name: app-release.apk  
       #    path: android/app/build/outputs/apk/release/app-release.apk
       #    retention-days: 1
-      - name: Upload APK
+      - name: Upload .aab
         uses: actions/upload-artifact@v4
         with:
           name: app-release.aab
