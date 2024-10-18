@@ -56,7 +56,7 @@ jobs:
           retention-days: 1
       - name: Decode service account JSON
         run: |
-            echo $GOOGLE_PLAY_SERVICE_ACCOUNT_JSON | base64 --decode > service_account_key.json
+            echo "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON}" | base64 --decode > service_account_key.json
             cat service_account_key.json
 
       - name: Print Secret (for debugging)
