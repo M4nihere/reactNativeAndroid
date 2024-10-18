@@ -39,7 +39,7 @@ jobs:
 
       - name: Build Application
         run: |
-          cd android ./gradlew bundleRelease
+          cd android && ./gradlew bundleRelease
           #cd android && ./gradlew assembleRelease && ./gradlew bundleRelease
 
       #- name: Upload APK
